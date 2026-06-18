@@ -5,6 +5,9 @@ An event-driven automation service that uses the [Devin API](https://docs.devin.
 ## The Problem
 Security scanners are good at identifying vulnerabilities. What they're not good at is remediating them. Remediation still requires engineers to read advisories, understand how a dependency is used within a codebase, implement a fix, validate the change, and open a pull request. This project explores whether Devin can autonomously perform that entire workflow.
 
+## Trigger Design
+The service is designed to be triggered by engineering events such as vulnerability scan findings, issue creation, or repository activity. For the purposes of this demo, I exposed a manual trigger endpoint to simulate those events and included a background scheduler to demonstrate unattended operation.
+
 ## How It Works
 1. A background scheduler runs every 60 seconds and checks for any known issues that haven't been remediated yet
 2. When it finds one (or when triggered manually via the `/remediate/{issue_id}` endpoint), it creates a Devin session with a detailed, context-aware prompt
